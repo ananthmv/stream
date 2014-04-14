@@ -22,7 +22,8 @@
 
                  ;; Database
                  [com.googlecode.flyway/flyway-core "2.3.1"]
-                 [com.jolbox/bonecp "0.8.0.RELEASE"]
+                 [com.jolbox/bonecp "0.8.0.RELEASE"
+                  :exclusions [org.slf4j/slf4j-api]]
                  [org.postgresql/postgresql "9.3-1100-jdbc41"]
                  [yesql "0.4.0"
                   :exclusions [org.clojure/clojure]]
