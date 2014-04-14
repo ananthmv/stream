@@ -22,7 +22,7 @@
   [entries file]
   (spit file (apply str (map #(str % "\n") entries)) :append false))
 
-(defn save-links
+(defn save-links!
   [entries source]
   (dorun
    (map #(db/add-articles (:link %) (:title %) source (util/domain-name (:link %))) entries)))
@@ -49,7 +49,6 @@
         latest-links (set/difference links old-links)
         _ (log/debug "latest links" latest-links)
         new-links (filter-old latest-links data)
-        _ (log/debug "new links" new-links)
-        persist (save-links new-links (util/domain-name rss-url))]
+        ]
     (log/debug "completed collecting articles links")
     new-links))

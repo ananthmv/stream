@@ -12,7 +12,7 @@ This mini-project is aims to store those invaluable article's links into getpock
 
 ##### credentials
 
-We need to add the following credentials into ./lein/profiles.clj or env variable before running the deamon.
+We need to add the following credentials into `./lein/profiles.clj` or env variable before running the deamon.
 
 ```clj
   {:user {:env
@@ -24,8 +24,14 @@ We need to add the following credentials into ./lein/profiles.clj or env variabl
         :delicious-client-secret "client-secret"
         :delicious-username "unique-username"
         :delicious-password "secret-password"
-        :database-uri "yet-to-update"}}
+        :database "no"
+        :database-uri "jdbc:postgresql://localhost:5432/dbname"
+        :db-username "username"
+        :db-password "secretpass"
+        :rss-url}}
 ```
+
+Currently, postgresql db is supported to store the links and related information.
 
 ##### delicious link
 
