@@ -19,6 +19,7 @@
                  ;; Utility
                  [org.clojars.scsibug/feedparser-clj "0.4.0"
                   :exclusions [org.clojure/clojure]]
+                 [org.apache.pdfbox/pdfbox "1.8.4"]
 
                  ;; Database
                  [com.googlecode.flyway/flyway-core "2.3.1"]
