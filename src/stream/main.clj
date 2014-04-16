@@ -25,7 +25,9 @@
       (if (activate :database)
         (f/save-links! links (u/domain-name rss-url)))
       (if (activate :pocket)
-        (map #(p/add-url! (:link %) (:title %) "clojure, planet-clojure") links))
+        (dorun
+         (map #(p/add-url! (:link %) (:title %) "clojure, planet-clojure") links)))
       (if (activate :delicious)
-        (map #(d/bookmark-url! (:link %) (:title %) "clojure, planet-clojure") links))
+        (dorun
+         (map #(d/bookmark-url! (:link %) (:title %) "clojure, planet-clojure") links)))
       (log/info "completed processing clojure articles"))))
