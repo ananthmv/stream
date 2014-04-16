@@ -1,23 +1,26 @@
 (ns stream.pdf.school
   (:import [java.io File OutputStreamWriter FileOutputStream BufferedWriter InputStream OutputStream]
-           [java.net URL])
+           [java.net URL]
+           [java.io FileNotFoundException StringWriter])
   (:require [net.cgrand.enlive-html :as html]
             [org.httpkit.client :as http]
-            [clojure.java.io :as io])
+            [clojure.java.io :as io]
+            [instaparse.core :as instaparse])
   (:gen-class))
 
 (def to-ignore {#"S.No C.Code School Name LKG UKG I II III IV V VI VII VIII IX X XI XII" ""
                 #"Note:- NF - There is no Recognition, Hence No Fee is Fixed." ""
-                #"DISTRICT [ REVISED FEE STRUCTURE FOR APPEALED SCHOOLS ]" ""
-                ;#"\r" "#"
-                #"\n" ""
+                #"\d[0-9]\s-\s[A-Z]+\s\s(DISTRICT \[ REVISED FEE STRUCTURE FOR APPEALED SCHOOLS \])" ""
+                ;#"\n" ""
                 })
 
 (defn clean-up!
-  [f]
+  [f regex]
   (let [content (slurp f)
-        cleaned (reduce #(apply clojure.string/replace %1 %2) content to-ignore)
+        cleaned (reduce #(apply clojure.string/replace %1 %2) content regex)
         _ (spit (str "c-" f) cleaned)]))
+
+;(clean-up! "02_THIRUNELVELI.txt" to-ignore)
 
 (defn get-page
   [url]
@@ -66,3 +69,31 @@
         _ (dorun ;dorun is required to run fn with lazy-seq input
            (map (fn[fl] (http-download! (:url fl) (:file fl))) pdfs))]
     pdfs))
+
+
+(def parser
+  (instaparse/parser (io/resource "stream/pdf/schoolinfo.bnf")))
+
+(defn process-instaparse-result
+  [parsed]
+  (spit "temp.log" parsed)
+  (cond
+   (instaparse/failure? parsed) (let [failure (instaparse/get-failure parsed)]
+                                  (binding [*out* (StringWriter.)]
+                                    (instaparse.failure/pprint-failure failure)
+                                    (throw (ex-info (.toString *out*)
+                                                    failure))))
+   (< 1 (count parsed)) (throw (ex-info "error :" {:variations (count parsed)}))
+   :else (first parsed)))
+
+(defn parse-schoolinfo
+  "Parses a string with stream schoolinfo syntax into a sequence"
+  [text]
+  (process-instaparse-result
+   ;(instaparse/transform parser-transforms
+                         (instaparse/parses parser
+                                            (str text "\n");;; TODO This is a workaround for files with no end-of-line marker.
+                                            ;:start :schoolinfo
+                                            )))
+
+;(parse-schoolinfo (slurp "c-02_THIRUNELVELI.txt"))

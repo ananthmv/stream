@@ -20,6 +20,7 @@
                  [org.clojars.scsibug/feedparser-clj "0.4.0"
                   :exclusions [org.clojure/clojure]]
                  [org.apache.pdfbox/pdfbox "1.8.4"]
+                 [instaparse "1.3.1"]
 
                  ;; Database
                  [com.googlecode.flyway/flyway-core "2.3.1"]
@@ -45,6 +46,13 @@
   :aot :all
   :warn-on-reflection true
   :test-paths ["test"]
+  :jvm-opts ["-Dclojure.compiler.disable-locals-clearing=true"
+             "-Djava.net.preferIPv4Stack=true"
+             "-Dsun.net.inetaddr.ttl=0"
+             "-XX:+TieredCompilation"
+             "-Xms1G" ;256m
+             "-Xmx1G"
+             "-server"]
   :jar-name "stream.jar"
   :uberjar-name "stream-standalone.jar"
   :plugins [[lein-environ "0.4.0"]])

@@ -1,0 +1,15 @@
+schoolinfo = <blank-line*> schoolname*
+schoolname = c-num | name | fees
+
+c-num = (number* whitespace? number)* <newline>
+name =  number? non-whitespace* (<whitespace>? non-whitespace?)* <newline>
+fees =  (<whitespace> | number)* (<whitespace> hypen)* <newline>
+
+blank-line = whitespace* newline
+any = (whitespace | non-whitespace)+
+newline = '\n' | '\r\n'
+whitespace = (' ' | '\t')+
+non-whitespace = #'\S+'
+number = #'[0-9]+'
+letter = #'[a-zA-Z]'
+hypen = '-'
