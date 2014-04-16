@@ -21,8 +21,8 @@
 
 (def ^:dynamic *oauth-authorize-url* "https://getpocket.com/auth/authorize?request_token=%s&redirect_uri=%s")
 
-(def ^:private creds {:consumer_key (ev/env :pocket_consumer_key)
-                      :access_token (ev/env :pocket_access_token)})
+(def ^:private creds {:consumer_key (ev/env :pocket-consumer-key)
+                      :access_token (ev/env :pocket-access-token)})
 
 (def ^:private options {:timeout 2000
                         :user-agent "clojure-articles app"

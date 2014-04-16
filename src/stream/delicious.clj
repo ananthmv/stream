@@ -15,10 +15,10 @@
 (def ^:const add-url "https://api.delicious.com/v1/posts/add?url=%s&description=%s&tags=%s")
 (def ^:const oauth-authorize "https://avosapi.delicious.com/api/v1/oauth/token?client_id=%s&client_secret=%s&grant_type=credentials&username=%s&password=%s")
 
-(def ^:private creds {:client-id (ev/env :delicious_client_id)
-                      :client-secret (ev/env :delicious_client_secret)
-                      :username (ev/env :delicious_username)
-                      :password (ev/env :delicious_password)})
+(def ^:private creds {:client-id (ev/env :delicious-client-id)
+                      :client-secret (ev/env :delicious-client-secret)
+                      :username (ev/env :delicious-username)
+                      :password (ev/env :delicious-password)})
 
 (def ^:private options {:user-agent "clojure-articles app"
                         :headers {"X-Accept" "application/json"
