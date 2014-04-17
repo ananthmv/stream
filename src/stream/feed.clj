@@ -7,7 +7,7 @@
         [clojure.set :as set])
   (:gen-class))
 
-(def log-file "links.log")
+(def ^:private log-file "links.log")
 
 (defn synced-links
   "Reads and creates a data set for the previous logged links"

@@ -1,15 +1,17 @@
-schoolinfo = <blank-line*> schoolname*
-schoolname = c-num | name | fees
+schoolinfo = <blank-line*> (c-num | name | fees | common)*
 
-c-num = (number* whitespace? number)* <newline>
-name =  number? non-whitespace* (<whitespace>? non-whitespace?)* <newline>
-fees =  (<whitespace> | number)* (<whitespace> hypen)* <newline>
+c-num = number* <whitespace>? number* <newline>
+name =  !c-num number? word* (<whitespace>? word)* (<whitespace>? | postal?* | pin?)* <newline>
+fees =  !name !c-num number* (<whitespace> hypen?)* <whitespace> (<whitespace>? number)* (<whitespace> hypen?)* <newline>
+common = !name !c-num number* <whitespace> number* <whitespace> (<whitespace>? word)* (<whitespace>? postal?* | pin?)* <whitespace> fees <newline>
 
-blank-line = whitespace* newline
+blank-line = whitespace* | newline
 any = (whitespace | non-whitespace)+
 newline = '\n' | '\r\n'
 whitespace = (' ' | '\t')+
 non-whitespace = #'\S+'
+postal = #'[0-9]{3}'
+pin = #'[0-9]{6}'
+word = #'[a-zA-Z&,()-]+'
 number = #'[0-9]+'
-letter = #'[a-zA-Z]'
 hypen = '-'

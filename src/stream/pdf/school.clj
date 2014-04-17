@@ -70,30 +70,49 @@
            (map (fn[fl] (http-download! (:url fl) (:file fl))) pdfs))]
     pdfs))
 
+(defn- str-non-nil
+  "Exactly like `clojure.core/str`, except it returns an empty string
+  with no args (whereas `str` would return `nil`)."
+  [& args]
+  (apply str "" args))
 
-(def parser
-  (instaparse/parser (io/resource "stream/pdf/schoolinfo.bnf")))
+(def ^:private parser (instaparse/parser (io/resource "stream/pdf/schoolinfo.bnf")))
+
+(def parser-transforms
+  {:c-num (fn [& args]
+           [:c-num (apply str-non-nil args)])
+   :name (fn [& args]
+           [:name (apply str-non-nil args)])
+   :word (fn [& args]
+           [:word (apply str-non-nil args)])
+   :fees (fn [& args]
+           [:fees (apply str-non-nil args)])
+   :postal (fn [& args]
+           [:postal (apply str-non-nil args)])
+   :hypen (fn [& args]
+           [:hypen (apply str-non-nil args)])
+   :schoolinfo list})
 
 (defn process-instaparse-result
   [parsed]
-  (spit "temp.log" parsed)
   (cond
    (instaparse/failure? parsed) (let [failure (instaparse/get-failure parsed)]
                                   (binding [*out* (StringWriter.)]
                                     (instaparse.failure/pprint-failure failure)
                                     (throw (ex-info (.toString *out*)
                                                     failure))))
-   (< 1 (count parsed)) (throw (ex-info "error :" {:variations (count parsed)}))
    :else (first parsed)))
 
 (defn parse-schoolinfo
   "Parses a string with stream schoolinfo syntax into a sequence"
   [text]
   (process-instaparse-result
-   ;(instaparse/transform parser-transforms
+   (instaparse/transform parser-transforms
                          (instaparse/parses parser
                                             (str text "\n");;; TODO This is a workaround for files with no end-of-line marker.
                                             ;:start :schoolinfo
-                                            )))
+                                            ))))
 
+;(clean-up! "02_THIRUNELVELI.txt" to-ignore)
 ;(parse-schoolinfo (slurp "c-02_THIRUNELVELI.txt"))
+;(clojure.pprint/pprint (parse-schoolinfo (slurp "c-02_THIRUNELVELI.txt")))
