@@ -33,6 +33,11 @@
    (filter (fn [l]
             (some #(= (:link l) %) ol)) nl)))
 
+(defn filter-empty
+  [nl]
+  (doall
+   (filter #(not (= (:link %) "")) nl)))
+
 (defn extract-data
   [entries]
   (map #(let [title (:title %)
@@ -49,6 +54,7 @@
         latest-links (set/difference links old-links)
         _ (log/debug "latest links" latest-links)
         new-links (filter-old latest-links data)
+        nl (filter-empty new-links)
         ]
     (log/debug "completed collecting articles links")
-    new-links))
+    nl))
