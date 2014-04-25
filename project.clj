@@ -9,6 +9,7 @@
                  [org.clojure/clojure "1.6.0"]
                  [org.clojure/data.json "0.2.4"]
                  [org.clojure/java.jdbc "0.3.3"]
+                 [org.clojure/data.csv "0.1.2"]
 
                  [environ "0.4.0"]
 
@@ -46,6 +47,7 @@
   :aot :all
   :warn-on-reflection true
   :test-paths ["test"]
+  :aliases {"cc" ["do" "clean," "uberjar"]} ;commit check
   :jvm-opts ["-Dclojure.compiler.disable-locals-clearing=true"
              "-Djava.net.preferIPv4Stack=true"
              "-Dsun.net.inetaddr.ttl=0"
