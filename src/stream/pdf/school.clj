@@ -76,7 +76,7 @@
   [& args]
   (apply str "" args))
 
-(def ^:private parser (instaparse/parser (io/resource "stream/pdf/schoolinfo.bnf")))
+(def ^:private parser (instaparse/parser (io/resource "stream/pdf/schoolinfo.bnf") :autowhitespace :standard))
 
 (def parser-transforms
   {:c-num (fn [& args]
