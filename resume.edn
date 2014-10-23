@@ -1,0 +1,80 @@
+{:experience [{:company "Claytocup Labs"
+               :role "Founder & Chief Architect"
+               :fromdate "July 2014"
+               :todate "Present"
+               :months 4
+               :description "Building BenchMark, a product built for the Indian Education System. BenchMark is designed to work seamlessly the way an academic institutions naturally work. It has very intuitive and responsive interface that brings the knowledge that teachers required to improve students and administration."
+               :techstack "Clojure, PostgreSQL, HTML5, Bootstrap, CSS3 and httpkit"
+               :current true}
+
+              {:company "CGI"
+               :role "Senior Consultant"
+               :fromdate "February 2012"
+               :todate "June 2014"
+               :months 29
+               :description "Lead the design and implementation of a BIG data project for Canada's Largest Telecom Client. Particularly, implemented CASL related services."
+               :techstack "Java, Oracle DB, Webservice, MDM, Websphere and AIX"
+               :current false}
+
+              {:company "CGI"
+               :role "Technical Lead"
+               :fromdate "November 2007"
+               :todate "September 2011"
+               :months 47
+               :description "Lead and handled the offshore team which is responsible for the Design, Implementation, Testing and deployment of two of the major application in Telecom OSS space"
+               :techstack "Java, Oracle DB, Webservice, Tapestry Order Engine, Weblogic Portals, Websphere/JBoss and AIX"
+               :current false}
+
+              {:company "Verizon Data Services"
+               :role "Software Engineer"
+               :fromdate "October 2006"
+               :todate "October 2007"
+               :months 13
+               :description "Developed Web UI for an Order Management System for Telecom Business"
+               :techstack "Java, Cocobase API, Struts and Tomcat"
+               :current false}
+
+              {:company "AddVal Technology Inc."
+               :role "Software Engineer"
+               :fromdate "June 2005"
+               :todate "October 2006"
+               :months 17
+               :description "Worked for Air Cargo Management System"
+               :techstack "Java, Struts, Oracle DB, Shell Scripting, JIRA/Subversion administration and AIX"
+               :current false}]
+
+ :skills ["Java" "Clojure" "Software Design" "Simplification" "Keeping Things Simple" "Web 2.0" "Android" "Linux" "Programming"]
+
+ :awards [{:award-name "S.T.A.R Award"
+           :from "CGI"
+           :awarded-date "September 2009"}
+
+          {:award-name "Key Contributor Award"
+           :from "CGI"
+           :awarded-on "July 2009"}
+
+          {:award-name "Key Contributor Award"
+           :from "CGI"
+           :awarded-on "June 2008"}
+
+          {:award-name "Best Programmer"
+           :from "AddVal Technology"
+           :awarded-on "February 2006"}]
+
+ :interest ["programming" "new technology" "gaming" "photography" "traveling"]
+
+ :linked-in "https://www.linkedin.com/in/ananthmv"
+
+ :education { :degrees {:undergradute [{ :college "Kamaraj College of Engineering and Technolgy"
+                                         :course-duration "4 Years"
+                                         :joined "2001"
+                                         :passing-year "2005"
+                                         :degree "Bachelor of Engineering"
+                                         :subject "Computer Science and Engineering"}]}
+              :schools [ { :school-name "Bharath Montessori Matriculation and Higher Secondary School"
+                           :certificate "H.S.C"
+                           :major "Maths, Physics, Computer Science"
+                           :year 2001}]
+              }
+
+ }
