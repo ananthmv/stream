@@ -37,5 +37,9 @@
         awards   (:awards resume)
         interest (:interest resume)
         linkedin (:linked-in resume)
-        schools  (:schools resume)
-        degrees  (:degrees resume)]))
+        edu      (:education resume)
+        schools  (:schools edu)
+        degrees  (:degrees edu)]
+    (println "print pdf resume")))
+
+(print-resume)
