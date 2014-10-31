@@ -1,6 +1,8 @@
 (ns stream.mist.word-freq
   (:require [clojure.java.io :as io]))
 
+(defonce stop-words #{"the" "and" "of" "to" "a" "i" "it" "in" "or" "is"})
+
 (defn word-freq
   "Snippet taken from http://stackoverflow.com/a/3206954
    Reference for thread macro, doall, mapcat, reduce"
@@ -11,7 +13,7 @@
              (with-open [rdr (io/reader f)] (doall (line-seq rdr)))
              ; mapcat concat the maps of each line splited as 1gram.
              (mapcat (fn [l] (map #(.toLowerCase %) (re-seq #"\w+" l))))
-             (remove #{"the" "and" "of" "to" "a" "i" "it" "in" "or" "is"})
+             (remove stop-words)
              (reduce #(assoc %1 %2 (inc (%1 %2 0))) {})
              (sort-by val >)))) ; alternative to (sort-by (comp - val)))))
 
