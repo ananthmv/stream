@@ -11,7 +11,7 @@
                  [org.clojure/java.jdbc "0.3.3"]
                  [org.clojure/data.csv "0.1.2"]
 
-                 [environ "0.4.0"]
+                 [environ "1.0.0"]
 
                  ;; Web
                  [http-kit "2.1.18"]
@@ -57,4 +57,4 @@
              "-server"]
   :jar-name "stream.jar"
   :uberjar-name "stream-standalone.jar"
-  :plugins [[lein-environ "0.4.0"]])
+  :plugins [[lein-environ "1.0.0"]])
