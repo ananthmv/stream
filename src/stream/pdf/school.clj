@@ -5,8 +5,7 @@
   (:require [net.cgrand.enlive-html :as html]
             [org.httpkit.client :as http]
             [clojure.java.io :as io]
-            [instaparse.core :as instaparse])
-  (:gen-class))
+            [instaparse.core :as instaparse]))
 
 (def to-ignore {#"S.No C.Code School Name LKG UKG I II III IV V VI VII VIII IX X XI XII" ""
                 #"Note:- NF - There is no Recognition, Hence No Fee is Fixed." ""
@@ -80,18 +79,16 @@
   (instaparse/parser (io/resource "stream/pdf/schoolinfo.bnf") :autowhitespace :standard))
 
 (def parser-transforms
-  {:c-num (fn [& args]
-           [:c-num (apply str-non-nil args)])
-   :name (fn [& args]
-           [:name (apply str-non-nil args)])
-   :word (fn [& args]
-           [:word (apply str-non-nil args)])
+  {:serial-school-no (fn [& args]
+                       {:serial-school-no (apply str-non-nil (second (second args)))})
+   :schoolname (fn [& args]
+                 {:schoolname (apply str-non-nil (interpose " " (map #(second %) args)))})
+   :address  (fn [& args]
+               {:address  (apply str-non-nil (interpose " " (map #(second %) args)))})
    :fees (fn [& args]
-           [:fees (apply str-non-nil args)])
-   :postal (fn [& args]
-           [:postal (apply str-non-nil args)])
+           {:fees (apply str-non-nil args)})
    :hypen (fn [& args]
-           [:hypen (apply str-non-nil args)])
+            [:hypen (apply str-non-nil args)])
    :schoolinfo list})
 
 (defn process-instaparse-result
@@ -107,13 +104,18 @@
 (defn parse-schoolinfo
   "Parses a string with stream schoolinfo syntax into a sequence"
   [text]
-  (process-instaparse-result
-   (instaparse/transform parser-transforms
-                         (instaparse/parses parser
-                                            (str text "\n");;; TODO This is a workaround for files with no end-of-line marker.
-                                            ;:start :schoolinfo
-                                            ))))
+  (let [parser-bnf (instaparse/parser (io/resource "stream/pdf/schoolinfo.bnf")
+                                  :autowhitespace
+                                  :standard)]
+    (process-instaparse-result
+     (instaparse/transform parser-transforms
+                           (instaparse/parses parser-bnf text
+                                              ;;;(str text "\n")TODO This is a workaround for files with no end-of-line marker.
+                                              ;:start :schoolinfo
+                                              )))))
 
-;(clean-up! "02_THIRUNELVELI.txt" to-ignore)
+(clean-up! "02_THIRUNELVELI.txt" to-ignore)
 ;(parse-schoolinfo (slurp "c-02_THIRUNELVELI.txt"))
 ;(clojure.pprint/pprint (parse-schoolinfo (slurp "c-02_THIRUNELVELI.txt")))
+(clojure.pprint/pprint (parse-schoolinfo (slurp "sample-input.txt")))
+

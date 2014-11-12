@@ -1,10 +1,12 @@
-schoolinfo = <blank-line*> (serial-school-no | schoolname | address | fees)*
+schoolinfo = <blank-line*> (serial-school-no schoolname address address? fees?)*
 
 serial-school-no = number* <whitespace>? number* <newline>
-schoolname =  !address !serial-school-no (<whitespace>? word)* (<whitespace>? | postal?* | pin?)* <newline>
-address = !schoolname !fees (<whitespace>? | word | number)* (<whitespace>? postal?* | pin?)* <newline>
-fees =  !schoolname !serial-school-no number* (<whitespace> hypen?)* <whitespace> (<whitespace>? number)* (<whitespace> hypen?)* <newline>
-common = number* <whitespace> number* <whitespace> (<whitespace>? word)* (<whitespace>? postal?* | pin?)* <whitespace> fees
+schoolname =  (<whitespace>? word* number*)* <newline>
+address = (<whitespace>? number* word*)* (<whitespace>? | word)* (<whitespace>? postal?* | pin?)* <newline>
+fees = (<whitespace>? (nf* | number*))* (<whitespace>? | number* | hypen?)* <newline>
+
+fee = (<whitespace>? nf*)* number* (<whitespace>? | number* | hypen?)* <newline>
+schoolname1 =  (<whitespace>? word)* (<whitespace>? | postal?* | pin?)* <newline>
 
 blank-line = whitespace* | newline
 any = (whitespace | non-whitespace)+
@@ -14,5 +16,6 @@ non-whitespace = #'\S+'
 postal = #'[0-9]{3}'
 pin = #'[0-9]{6}'
 word = #'[a-zA-Z&,()-.\/\'\#]+'
+nf = #'NF'
 number = #'[0-9]+'
 hypen = '-'

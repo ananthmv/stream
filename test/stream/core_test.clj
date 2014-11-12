@@ -1,6 +1,6 @@
-(ns getpocket-clj.core-test
+(ns stream.core-test
   (:require [clojure.test :refer :all]
-            [getpocket-clj.core :refer :all]))
+            [stream.core :refer :all]))
 
 (deftest a-test
   (testing "FIXME, I fail."
