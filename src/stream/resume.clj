@@ -42,4 +42,4 @@
         degrees  (:degrees edu)]
     (println "print pdf resume")))
 
-(print-resume)
+;(print-resume)

@@ -1,4 +1,4 @@
-(ns stream.delicious
+(ns stream.planet-clj.delicious
   ^{:author "Anand Muthu"
     :doc "Lightweight delicious API wrapper"}
   (:require [org.httpkit.client :as http]

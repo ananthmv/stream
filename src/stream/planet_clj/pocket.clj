@@ -1,4 +1,4 @@
-(ns stream.pocket
+(ns stream.planet-clj.pocket
   ^{:author "Anand Muthu"
     :doc "Lightweight getpocket.com API wrapper"}
   (:require [org.httpkit.client :as http]

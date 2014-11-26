@@ -114,8 +114,8 @@
                                               ;:start :schoolinfo
                                               )))))
 
-(clean-up! "02_THIRUNELVELI.txt" to-ignore)
+;(clean-up! "02_THIRUNELVELI.txt" to-ignore)
 ;(parse-schoolinfo (slurp "c-02_THIRUNELVELI.txt"))
 ;(clojure.pprint/pprint (parse-schoolinfo (slurp "c-02_THIRUNELVELI.txt")))
-(clojure.pprint/pprint (parse-schoolinfo (slurp "sample-input.txt")))
+;(clojure.pprint/pprint (parse-schoolinfo (slurp "sample-input.txt")))
 

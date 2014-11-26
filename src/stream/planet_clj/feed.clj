@@ -1,8 +1,10 @@
-(ns stream.feed
+(ns stream.planet-clj.feed
   (:require [clojure.string :as string]
             [clojure.tools.logging :as log]
-            [stream.db :as db]
-            [stream.utils :as util])
+            [stream.planet-clj.cassandra :as cas]
+            [stream.planet-clj.db :as db]
+            [stream.planet-clj.utils :as util]
+            [clojurewerkz.cassaforte.uuids :as uid])
   (:use [feedparser-clj.core]
         [clojure.set :as set])
   (:gen-class))
@@ -22,7 +24,17 @@
   [entries file]
   (spit file (apply str (map #(str % "\n") entries)) :append false))
 
-(defn save-links!
+(defn save-links-to-cassandra!
+  [entries source]
+  (dorun
+   (map #(cas/add-articles {:id (uid/random)
+                            :link (:link %)
+                            :title (:title %)
+                            :source source
+                            :domain (util/domain-name (:link %))
+                            :added_on (.getTime (java.util.Date.))}) entries)))
+
+(defn save-links-to-db!
   [entries source]
   (dorun
    (map #(db/add-articles (:link %) (:title %) source (util/domain-name (:link %))) entries)))

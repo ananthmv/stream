@@ -1,4 +1,4 @@
-(ns stream.db
+(ns stream.planet-clj.db
   (:require [clojure.java.jdbc :as jdbc]
             [clojure.tools.logging :as log]
             [stream.config :as config]

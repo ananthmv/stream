@@ -1,10 +1,10 @@
-(ns stream.utils
+(ns stream.planet-clj.utils
   (:require [clojure.string :as string]
             [clojure.tools.logging :as log]
             [clojure.data.csv :as csv]
             [clojure.java.io :as io]
             [net.cgrand.enlive-html :as html]
-            [stream.db :as db])
+            [stream.planet-clj.db :as db])
   (:import [java.net URL]
            [java.io IOException]
            [java.util.UUID])

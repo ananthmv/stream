@@ -31,6 +31,9 @@
                  [yesql "0.4.0"
                   :exclusions [org.clojure/clojure]]
 
+                 ;;Distributed Data Store
+                 [clojurewerkz/cassaforte "2.0.0-rc1"] ; Cassandra
+
                  ;; Logging
                  [org.clojure/tools.logging "0.2.6"]
                  [org.slf4j/slf4j-log4j12 "1.7.1"]
