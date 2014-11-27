@@ -1,7 +1,7 @@
 # Stream
 #####First step for Clojure enlightenment
 
-Stream is containing the experiments and utilities built to learn Clojure in [Dhammapada](http://en.wikipedia.org/wiki/Dhammapada) way. 
+Stream is containing the experiments and utilities built to learn Clojure in [Dhammapada](http://en.wikipedia.org/wiki/Dhammapada) way.
 
 Please note that the implementation uses various lib to learn and experiment with them. Production grade performance is not guaranteed.
 
@@ -15,7 +15,7 @@ mailing list. Notably, Planet Clojure (created by BG and Alex) has aggregated a 
 Any given day, I used to log into clojure.in to read articles and often pocket them to read it later
 during commute. Unfortunately, the site has only finite set of "latest" articles those are 5 days or less old (based on the number of articles being written). The older articles will be lost when reader haven't logged in for a long time.
 
-This mini-project is aims to store those invaluable article's links into getpocket.com and delicious.com respectively. 
+This mini-project is aims to store those invaluable article's links into getpocket.com and delicious.com respectively.
 
 ##### credentials
 
@@ -38,7 +38,7 @@ We need to add the following credentials into `./lein/profiles.clj` or env varia
         :rss-url}}
 ```
 
-Currently, postgresql db is supported to store the links and related information.
+Currently, the links and related information are getting stored in Postgresql db and Cassandra data store.
 
 ##### delicious link
 

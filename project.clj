@@ -1,4 +1,4 @@
-(defproject stream "0.0.1"
+(defproject stream "0.0.2"
   :description "First step for Clojure enlightenment
                 (http://en.wikipedia.org/wiki/Four_stages_of_enlightenment)"
   :url "https://github.com/ananthmv/stream"
