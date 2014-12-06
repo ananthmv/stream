@@ -7,4 +7,5 @@
   []
   (log/info "STARTED processing clojure articles")
   (clj/fetch-articles)
-  (log/info "COMPLETED processing clojure articles"))
+  (log/info "COMPLETED processing clojure articles")
+  (System/exit 0))
